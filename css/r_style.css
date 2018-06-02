@@ -1,0 +1,30 @@
+body{
+
+	background: url(../img/bg.jpg) !important;
+}
+.contem-form{
+
+	padding: 10px;
+	border-radius: 4px;
+	border: solid 1px #CCC;
+}
+.logo{
+	width: 75%;
+	margin: 0px auto;
+}
+.logo img{
+	width: 95%;
+}
+.rodape{
+	height: 50px;
+border-top: 1px solid #a4c3df;
+box-shadow: 0px 0px 5px 1px #FFF;
+}
+#sbusca{
+	border: 1px solid #5cb4de;
+}
+.pgVenda{
+	background: #0fc2e0;
+	padding: 5px;
+	color: #FFF;
+}
