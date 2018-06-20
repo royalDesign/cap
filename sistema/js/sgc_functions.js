@@ -289,9 +289,8 @@ function open_target(params,btn){
 }/*END open_target*/
 
 
-function sgc_admin(params,target){
-  
-    
+function sgc_admin(params,target = ''){
+
   $.ajax({
     url:        'class/controler.php',
     data:       params,
@@ -306,7 +305,7 @@ function sgc_admin(params,target){
     
     success:    function(resposta){
       new PNotify({title: resposta.title, text: resposta.text,type: resposta.type});  
-    
+     //console.log(resposta);
       
      
     },//fim do sucesso
@@ -319,6 +318,8 @@ function sgc_admin(params,target){
 
     } // fim do complete    
   });//fim do ajax
+  
+   
 }
 
 
@@ -342,7 +343,6 @@ var check_all = $('.check_all');
             }
 
 function sgc_get_address(){
-
   
                 //Nova variável "cep" somente com dígitos.
                 var cep = $('#address_zipcode').val().replace(/\D/g, '');
@@ -425,6 +425,15 @@ function sgc_toggle(element){
     $('#'+element).toggle('fast');
     
 }
+
+
+
+ function cap_save_days_donate(){
+       var params = 'exec=save_days_donate&days='+$('#days_donate').val();
+       sgc_admin(params,target = '');        
+       
+           
+        }
 
 
 

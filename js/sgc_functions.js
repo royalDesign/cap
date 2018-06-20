@@ -65,7 +65,7 @@ error:              function(resposta){
 },
 success:        function(resposta){
   
-  if(resposta == -1){
+if(resposta == -1){
 
 new PNotify({
           title: 'Login inválido!',
@@ -79,7 +79,9 @@ new PNotify({
     new PNotify({title: 'Acesso negado!',text: 'Usuário bloqueado, em caso de dúvida contate o administrador do sistema.',type: 'info'});
     
 }else{
-   new PNotify({title: 'Sucesso!',text: resposta,type: 'success'});
+   
+   new PNotify({title: 'Sucesso!',text: 'Efetuando login!',type: 'success'});
+  window.location='sistema/'; 
 }  
   
 
@@ -97,6 +99,52 @@ complete:     function(){
  return false;
 }/*END send_form*/
 
+
+function send_mail_recovery(){
+    
+    var email   = $('#email_recovery');
+    var btn     = $('.j_send_recover');
+    if(valid_fild('email',email)){
+                
+    var params = 'exec=recovery_send_email&email='+email.val();
+    
+    $.ajax({
+    url:        'class/controler.php',
+    data:       params,
+    type:       'post',
+    dataType:   'json',
+    error:      function(){alert('Erro ao acessar a pagina desejada'); },
+    beforeSend:   function(){
+           
+      btn.empty().html('<img src="img/load_b.svg" width="20px">Aguarde...');
+    },//fim do beforeSend
+    
+    success:    function(resposta){
+        console.log(resposta);
+   if(resposta.error_number == 0){       
+       new PNotify({title: 'Sucesso!',text: resposta.message,type: 'success'});
+        $('.content-recover').slideUp('slow', function (){         
+        $('.login-form').slideDown('slow');
+    });
+    
+   }else if(resposta.error_number == 1){       
+       new PNotify({title: 'Ops!',text: resposta.message,type: 'info'});
+   }else{
+       new PNotify({title: 'Sucesso!',text: resposta.message,type: 'error'});
+   }
+      
+     
+    },//fim do sucesso
+
+    complete:       function(){
+      btn.empty().html('Enviar');
+      btn.removeAttr('disabled');
+    } // fim do complete    
+  });//fim do ajax
+        
+        
+    }//fim da validação do e-mail
+}
 function logar(){
 
   var form    = $('form[name="login"]');

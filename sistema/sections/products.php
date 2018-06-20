@@ -93,7 +93,7 @@ $rows = $search->fetchAll(PDO::FETCH_ASSOC);
     }else if($row['status'] == 3){
           $status = '<span class="label label-primary" title="Objeto doado">Doado</span>';
     }else{
-          $status = '<span class="label label-danger" title="Objeto com mais de 30 dias em posse">Disp. p/ doação</span>';
+          $status = '<span class="label label-danger" title="Objeto com mais de '.$_SESSION['days_donate'].' dias em posse">Disp. p/ doação</span>';
     }
 
 $query = "SELECT id,name FROM cap_images_objects WHERE mod_name = 'img_objects' AND object_id = ? AND type = 'imagem' ORDER BY id LIMIT 1";

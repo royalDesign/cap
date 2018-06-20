@@ -107,6 +107,46 @@ if (!empty($_POST['exec'])) {
                         $new_timeline = sgc_save_db('cap_objects_updates', $data_timeline, 0);
                     }
                     }//end if se for doação
+                    
+                    
+                    
+                     if($data['status'] == 2){
+                    if ($row_up['owner'] != $data['owner']) {
+                        $data_timeline = array();
+                        $data_timeline['created_user'] = $user['id'];
+                        $data_timeline['created_date'] = date('Y-m-d H:i:s');
+                        $data_timeline['item_id'] = $id;
+                        $data_timeline['icon'] = '<i class="fa fa-book bg-blue"></i>';
+                        $data_timeline['title'] = 'Atualizou este objeto';
+                        $data_timeline['content'] = '<p style="color: #3c8dbc"><strong>Proprietário</strong></p> <strong>De</strong> ' . $row_up['owner'] . ' <br><strong>para</strong> ' . $data['owner'];
+                        $new_timeline = sgc_save_db('cap_objects_updates', $data_timeline, 0);
+                    }
+                    
+                    if ($row_up['rg_owner'] != $data['rg_owner']) {
+                        $data_timeline = array();
+                        $data_timeline['created_user'] = $user['id'];
+                        $data_timeline['created_date'] = date('Y-m-d H:i:s');
+                        $data_timeline['item_id'] = $id;
+                        $data_timeline['icon'] = '<i class="fa fa-book bg-blue"></i>';
+                        $data_timeline['title'] = 'Atualizou este objeto';
+                        $data_timeline['content'] = '<p style="color: #3c8dbc"><strong>RG do propeietário</strong></p> <strong>De</strong> ' .$row_up['rg_owner']. ' <br><strong>para</strong> ' . $data['rg_owner'];
+                        $new_timeline = sgc_save_db('cap_objects_updates', $data_timeline, 0);
+                    }
+                    
+                    
+                    if ($row_up['delivered_date'] != $data['delivered_date']) {
+                        $data_timeline = array();
+                        $data_timeline['created_user'] = $user['id'];
+                        $data_timeline['created_date'] = date('Y-m-d H:i:s');
+                        $data_timeline['item_id'] = $id;
+                        $data_timeline['icon'] = '<i class="fa fa-book bg-blue"></i>';
+                        $data_timeline['title'] = 'Atualizou este objeto';
+                        $data_timeline['content'] = '<p style="color: #3c8dbc"><strong>Data da entrega</strong></p> <strong>De</strong> '.sgc_date_format($row_up['delivered_date'],'d/m/Y'). ' <br><strong>para</strong> ' .sgc_date_format($data['delivered_date'],'d/m/Y');
+                        $new_timeline = sgc_save_db('cap_objects_updates', $data_timeline, 0);
+                    }
+                    }//end if se for entregue
+                    
+                    
 
                     if($row_up['status'] != $data['status']) {
                         $all_status = array('','Em posse','Entregue','Doado','Disponível para doação');
@@ -274,7 +314,7 @@ $rows_categories = $search->fetchAll(PDO::FETCH_ASSOC);
                                                 <option <?php echo ($row['status'] == '1') ? 'selected' : ''; ?> value="1" title="Objeto disponível para devolução ao dono">Em posse</option>
                                                 <option <?php echo ($row['status'] == '2') ? 'selected' : ''; ?> value="2" title="Objeto entregue ao dono">Entregue</option>
                                                 <option <?php echo ($row['status'] == '3') ? 'selected' : ''; ?> value="3" title="Objeto doado">Doado</option>
-                                                <option <?php echo ($row['status'] == '4') ? 'selected' : ''; ?> value="4" title="Objeto com mais de 30 dias em posse">Disp. p/ doação</option>
+                                                <option <?php echo ($row['status'] == '4') ? 'selected' : ''; ?> value="4" title="Objeto com mais de <?php echo $_SESSION['days_donate'];?> dias em posse">Disp. p/ doação</option>
                                             </select>
                                         </div>
                                     </div>

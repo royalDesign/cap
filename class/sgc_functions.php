@@ -29,11 +29,7 @@ function conecta(){
 
 
 
-function redirect(){
-        
-   echo"<script language='javascript'> window.location='sistema/'; </script>";        
-    
-}
+
 
 
 

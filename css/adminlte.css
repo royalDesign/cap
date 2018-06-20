@@ -5,10 +5,10 @@
     text-align: center;
 }
 .fundo{
-    
-	background: url(../img/bg.jpg)!important;
-  background-repeat: no-repeat !important;
-  background-color: #3c8dbc !important;
+  
+  background: url(../img/bg.jpg)!important;
+  background-repeat: repeat !important;
+  background-color: #3f6886 !important;
 }
 .login-box a, .register-box a{
 	color:#50ace2 !important;

@@ -63,6 +63,29 @@ sgc_upload_files($arquivo,$files_accept,$type,$mod_name,$mod_id);
 
 }break;
 
+case 'save_days_donate':
+{
+    
+$resp = array();
+$query = 'UPDATE cap_configurations SET days_donate = ? WHERE id = 1';
+$row_up = conecta()->prepare($query);
+$ret = $row_up->execute(array(trim($_POST['days'])));
+$_SESSION['days_donate'] = trim($_POST['days']);
+
+if($ret){
+$resp['title'] = 'Salvo com sucesso';
+$resp['text'] = 'Prazo para doação atualizado';
+$resp['type'] = 'success';
+}else{
+$resp['title'] = 'Ops!';
+$resp['text'] = 'Não foi possível realizar esta operação';
+$resp['type'] = 'error';    
+    
+}
+        
+exit(json_encode($resp));
+}break;
+
 
 default:
     //echo "Rotina não configurada";
